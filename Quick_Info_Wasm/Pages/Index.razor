@@ -1,0 +1,278 @@
+﻿@page "/"
+
+@using Syncfusion.Blazor.Schedule
+@using Syncfusion.Blazor.Inputs
+@using Syncfusion.Blazor.Buttons
+@using Syncfusion.Blazor.DropDowns
+@using System.Globalization
+
+<SfSchedule TValue="AppointmentData" @ref="SheduleRef" CssClass="quick-info" Width="100%" Height="650px" SelectedDate="@(new DateTime(2023, 1, 9))">
+    <ScheduleQuickInfoTemplates>
+        <HeaderTemplate>
+            <div class="quick-info-header">
+                <div class="quick-info-header-content" style="@(GetHeaderStyles((context as AppointmentData)))">
+                    <div class="quick-info-title">
+                        @((context as AppointmentData).Id == default(int) ? "Add Appointment" : "Appointment Details")
+                    </div>
+                    <div class="duration-text">@(GetEventDetails((context as AppointmentData)))</div>
+                </div>
+            </div>
+        </HeaderTemplate>
+        <ContentTemplate>
+            @if ((context as AppointmentData).Id == default(int))
+            {
+                <div class="e-cell-content">
+                    <div class="content-area">
+                        <SfTextBox @ref="SubjectRef" Value="@((context as AppointmentData).Subject)" Placeholder="Title"></SfTextBox>
+                    </div>
+                    <div class="content-area">
+                        <SfDropDownList @ref="EventTypeRef" TValue="int" TItem="RoomsData" Index="0" DataSource="@ResourceData" Placeholder="Choose Type">
+                            <DropDownListFieldSettings Text="Name" Value="Id"></DropDownListFieldSettings>
+                        </SfDropDownList>
+                    </div>
+                    <div class="content-area">
+                        <SfTextBox @ref="DescriptionRef" Value="@((context as AppointmentData).Description)" Placeholder="Notes"></SfTextBox>
+                    </div>
+                </div>
+            }
+            else
+            {
+                AppointmentData Data = context as AppointmentData;
+                <div class="event-content">
+                    <div class="meeting-type-wrap">
+                        <label>Subject</label>:
+                        <span>@(Data.Subject)</span>
+                    </div>
+                    <div class="meeting-subject-wrap">
+                        <label>Type</label>:
+                        <span>@((Data.RoomId != 0) ? ResourceData.Where(item => item.Id.Equals(Data.RoomId)).FirstOrDefault().Name : "")</span>
+                    </div>
+                    <div class="notes-wrap">
+                        <label>Notes</label>:
+                        <span>@(Data.Description)</span>
+                    </div>
+                </div>
+            }
+        </ContentTemplate>
+        <FooterTemplate>
+            @if ((context as AppointmentData).Id == default(int))
+            {
+                <div class="cell-footer">
+                    <SfButton Content="More Details" OnClick="@(e => OnMoreDetailsClick(e, (context as AppointmentData), false))"></SfButton>
+                    <SfButton Content="Add" IsPrimary="true" OnClick="@(e => OnAdd(e, (context as AppointmentData)))"></SfButton>
+                </div>
+            }
+            else
+            {
+                <div class="event-footer">
+                    <SfButton IsPrimary="true" Content="More Details" OnClick="@(e => OnMoreDetailsClick(e, (context as AppointmentData), true))"></SfButton>
+                </div>
+            }
+        </FooterTemplate>
+    </ScheduleQuickInfoTemplates>
+    <ScheduleViews>
+        <ScheduleView Option="View.Day"></ScheduleView>
+        <ScheduleView Option="View.Week"></ScheduleView>
+        <ScheduleView Option="View.Month"></ScheduleView>
+    </ScheduleViews>
+    <ScheduleResources>
+        <ScheduleResource TValue="int" TItem="RoomsData" DataSource="@ResourceData" Field="RoomId" Title="Room Type" Name="MeetingRoom" TextField="Name" IdField="Id" ColorField="Color" AllowMultiple="false"></ScheduleResource>
+    </ScheduleResources>
+    <ScheduleEventSettings DataSource="@DataSource"></ScheduleEventSettings>
+</SfSchedule>
+
+@code {
+    SfSchedule<AppointmentData> SheduleRef;
+    SfDropDownList<int, RoomsData> EventTypeRef;
+    SfTextBox SubjectRef;
+    SfTextBox DescriptionRef;
+
+    private string GetEventDetails(AppointmentData data)
+    {
+        return data.StartTime.ToString("dddd dd, MMMM yyyy", CultureInfo.InvariantCulture) + " (" + data.StartTime.ToString("hh:mm tt", CultureInfo.InvariantCulture) + "-" + data.EndTime.ToString("hh:mm tt", CultureInfo.InvariantCulture) + ")";
+    }
+    private string GetHeaderStyles(AppointmentData data)
+    {
+        if (data.Id == default(int))
+        {
+            //CellClick Header Styles
+            return "align-items: center ; color: #919191;";
+        }
+        else
+        {
+            //EventClick Header Styles
+            return "background:" + this.ResourceData.Where(item => item.Id.Equals(data.RoomId)).FirstOrDefault().Color + "; color: #FFFFFF;";
+        }
+    }
+    private async void OnMoreDetailsClick(MouseEventArgs args, AppointmentData data, bool isEventData)
+    {
+        await SheduleRef.CloseQuickInfoPopupAsync();
+        if (isEventData == false)
+        {
+            AppointmentData eventData = new AppointmentData
+                {
+                    Id = new Random().Next(1000),
+                    Subject = SubjectRef.Value ?? "",
+                    StartTime = data.StartTime,
+                    EndTime = data.EndTime,
+                    Location = data.Location,
+                    Description = DescriptionRef.Value ?? "",
+                    IsAllDay = data.IsAllDay,
+                    RoomId = EventTypeRef.Value,
+                    RecurrenceException = data.RecurrenceException,
+                    RecurrenceID = data.RecurrenceID,
+                    RecurrenceRule = data.RecurrenceRule
+                };
+            await SheduleRef.OpenEditorAsync(eventData, CurrentAction.Add);
+        }
+        else
+        {
+            AppointmentData eventData = new AppointmentData
+                {
+                    Id = data.Id,
+                    Subject = data.Subject,
+                    Location = data.Location,
+                    Description = data.Description,
+                    StartTime = data.StartTime,
+                    EndTime = data.EndTime,
+                    IsAllDay = data.IsAllDay,
+                    RoomId = data.RoomId,
+                    RecurrenceException = data.RecurrenceException,
+                    RecurrenceID = data.RecurrenceID,
+                    RecurrenceRule = data.RecurrenceRule
+                };
+            await SheduleRef.OpenEditorAsync(eventData, CurrentAction.Save);
+        }
+    }
+
+    private async Task OnAdd(MouseEventArgs args, AppointmentData data)
+    {
+        await SheduleRef.CloseQuickInfoPopupAsync();
+        AppointmentData cloneData = new AppointmentData
+            {
+                Id = new Random().Next(1000),
+                Subject = SubjectRef.Value ?? "",
+                Description = DescriptionRef.Value ?? "",
+                StartTime = data.StartTime,
+                EndTime = data.EndTime,
+                RoomId = EventTypeRef.Value,
+                Location = data.Location,
+                IsAllDay = data.IsAllDay,
+                RecurrenceException = data.RecurrenceException,
+                RecurrenceID = data.RecurrenceID,
+                RecurrenceRule = data.RecurrenceRule
+            };
+        await SheduleRef.AddEventAsync(cloneData);
+    }
+    public List<AppointmentData> DataSource = new List<AppointmentData>
+{
+    new AppointmentData { Id = 1, Subject = "Board Meeting", Description = "Meeting to discuss business goal of 2023.", StartTime = new DateTime(2023, 1, 5, 9, 30, 0), EndTime = new DateTime(2023, 1, 5, 11, 0, 0), RoomId = 1},
+    new AppointmentData { Id = 2, Subject = "Training session on JSP", Description = "Knowledge sharing on JSP topics.", StartTime = new DateTime(2023, 1, 7, 9, 30, 0), EndTime = new DateTime(2023, 1, 7, 11, 0, 0), RoomId = 2}
+};
+    private List<RoomsData> ResourceData { get; set; } = new List<RoomsData> {
+    new RoomsData { Name = "Jammy", Id = 1, Color = "#ea7a57", Capacity = 20, Type = "Conference" },
+    new RoomsData { Name = "Tweety", Id = 2, Color = "#7fa900", Capacity = 7, Type = "Cabin" },
+    new RoomsData { Name = "Nestle", Id = 3, Color = "#5978ee", Capacity = 5, Type = "Cabin" }
+};
+    public class AppointmentData
+    {
+        public int Id { get; set; }
+        public string Subject { get; set; }
+        public string Location { get; set; }
+        public string Description { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
+        public Nullable<bool> IsAllDay { get; set; }
+        public string RecurrenceRule { get; set; }
+        public Nullable<int> RecurrenceID { get; set; }
+        public string RecurrenceException { get; set; }
+        public int RoomId { get; set; }
+    }
+    public class RoomsData
+    {
+        public string Name { get; set; }
+        public int Id { get; set; }
+        public int Capacity { get; set; }
+        public string Color { get; set; }
+        public string Type { get; set; }
+    }
+}
+<style>
+    /*HeaderStyles*/
+    .quick-info-header {
+        background-color: white;
+        padding: 8px 18px;
+    }
+
+    .quick-info-header-content {
+        justify-content: flex-end;
+        display: flex;
+        flex-direction: column;
+        padding: 5px 10px 5px;
+    }
+
+    .quick-info-title {
+        font-weight: 500;
+        font-size: 16px;
+        letter-spacing: 0.48px;
+        height: 22px;
+    }
+
+    .duration-text {
+        font-size: 11px;
+        letter-spacing: 0.33px;
+        height: 14px;
+    }
+    /*ContentStyles*/
+    .content-area {
+        padding: 10px;
+        width: 100%;
+    }
+
+    .event-content {
+        height: 90px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0 15px;
+    }
+
+    .meeting-type-wrap, .meeting-subject-wrap, .notes-wrap {
+        font-size: 11px;
+        color: #666;
+        letter-spacing: 0.33px;
+        height: 24px;
+        padding: 5px;
+    }
+
+    .event-content div label {
+        display: inline-block;
+        min-width: 45px;
+        color: #666;
+    }
+
+    .event-content div span {
+        font-size: 11px;
+        color: #151515;
+        letter-spacing: 0.33px;
+        line-height: 14px;
+        padding-left: 8px;
+    }
+
+    .quick-info .e-popup-content {
+    }
+    /*FooterStyles*/
+    .cell-footer.e-btn {
+        background-color: #ffffff;
+        border-color: #878787;
+        color: #878787;
+    }
+
+    .cell-footer {
+        padding-top: 10px;
+    }
+
+    .e-quick-popup-wrapper .e-cell-popup .e-popup-content {
+        padding: 0 14px;
+    }
+</style>
