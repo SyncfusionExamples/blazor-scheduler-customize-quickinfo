@@ -1,6 +1,6 @@
-# Blazor Scheduler Customize QuickInfo
+# How to customize QuickInfo in Blazor Scheduler
 
-A quick-start project that helps you customize the quick popups in Blazor Scheduler. This repository demonstrates how to tailor the quick info templates and popups to match your application's design and functionality requirements.
+A quick-start project that helps you customize the quick popups in [Blazor Scheduler](https://www.syncfusion.com/blazor-components/blazor-scheduler). This repository demonstrates how to tailor the quick info templates and popups to match your application's design and functionality requirements.
 
 ## Project Overview
 
