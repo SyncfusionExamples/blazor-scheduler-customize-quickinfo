@@ -1,10 +1,6 @@
 # How to customize QuickInfo in Blazor Scheduler
 
-A quick-start project that helps you customize the quick popups in [Blazor Scheduler](https://www.syncfusion.com/blazor-components/blazor-scheduler). This repository demonstrates how to tailor the quick info templates and popups to match your application's design and functionality requirements.
-
-## Project Overview
-
-This project showcases advanced customization techniques for the Syncfusion Blazor Scheduler component, specifically focusing on quick popup templates. Learn how to modify the default quick info appearance and behavior to create a personalized user experience.
+This quick start project demonstrates how to customize quick popups in the [Blazor Scheduler](https://www.syncfusion.com/blazor-components/blazor-scheduler), including tailoring quick info templates and modifying their appearance and behavior. It showcases advanced techniques for creating personalized and interactive popup experiences, helping developers enhance the scheduler interface to match application design and functionality requirements.
 
 ## Features
 
@@ -14,20 +10,17 @@ This project showcases advanced customization techniques for the Syncfusion Blaz
 - **Responsive Design:** Ensure quick popups display correctly across all devices
 - **Syncfusion Blazor Integration:** Utilize enterprise-grade scheduler capabilities
 
-## Project Prerequisites
+## Prerequisites
 
-Make sure that you have the latest versions of the following tools in your machine before starting to work on this project:
-- Visual Studio 2022
-- .NET 6.0 or higher
-- Syncfusion Blazor NuGet packages
+* Visual Studio 2022
+* .NET 6.0 or higher
 
-## How to Run This Application
+## How to Run the Project
 
-1. **Clone the Repository:** Clone the <code>blazor-scheduler-customize-quickinfo</code> repository to your local machine and open it in Visual Studio 2022.
-
-2. **Register Syncfusion License Key:** Register the Syncfusion license key in the Program.cs file. If you have any doubts, check the documentation link:  https://blazor.syncfusion.com/documentation/getting-started/license-key/how-to-register-in-an-application
-
-3. **Build and Run:** Build and run your project to view the output and explore the quick info customization features.
+1. Checkout this project to your local machine
+2. Open the solution file using Visual Studio 2022
+3. Build the solution to restore the required NuGet packages
+4. Press `F5` to start the application
 
 ## Documentation
 
