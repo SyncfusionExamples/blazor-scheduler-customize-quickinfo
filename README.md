@@ -1,15 +1,33 @@
-# Blazor Scheduler Customize QuickInfo
-A quick-start project that helps you how to customize the quick popups in Blazor Scheduler. 
+# How to customize QuickInfo in Blazor Scheduler
 
-Documentation: https://blazor.syncfusion.com/documentation/scheduler/editor-template#quick-popups
+This quick start project demonstrates how to customize quick popups in the [Blazor Scheduler](https://www.syncfusion.com/blazor-components/blazor-scheduler), including tailoring quick info templates and modifying their appearance and behavior. It showcases advanced techniques for creating personalized and interactive popup experiences, helping developers enhance the scheduler interface to match application design and functionality requirements.
 
-Online examples: https://blazor.syncfusion.com/demos/scheduler/quick-info-template?theme=fluent
-                 
-# Project prerequisites
-Make sure that you have the latest versions of 'Visual Studio 2022' in your machine before starting to work on this project.
-# How to run this application?
-• To run this application, you need to first clone the <code>blazor-scheduler-customize-quickinfo</code> repository and then open it in Visual Studio 2022.
+## Features
 
-• Register the syncfusion license key in the Program.cs file, if you have any doubts check the documentation link:  https://blazor.syncfusion.com/documentation/getting-started/license-key/how-to-register-in-an-application
+- **Quick Popup Customization:** Modify quick info templates to display custom content
+- **Template Flexibility:** Create personalized quick info popup layouts
+- **Event Management:** Handle quick info interactions effectively
+- **Responsive Design:** Ensure quick popups display correctly across all devices
+- **Syncfusion Blazor Integration:** Utilize enterprise-grade scheduler capabilities
 
-• Now, simply build and run your project to view the output.
+## Prerequisites
+
+* Visual Studio 2022
+* .NET 6.0 or higher
+
+## How to Run the Project
+
+1. Checkout this project to your local machine
+2. Open the solution file using Visual Studio 2022
+3. Build the solution to restore the required NuGet packages
+4. Press `F5` to start the application
+
+## Documentation
+
+- **Quick Info Template Guide:** https://blazor.syncfusion.com/documentation/scheduler/editor-template#quick-popups
+- **Online Examples:** https://blazor.syncfusion.com/demos/scheduler/quick-info-template?theme=fluent
+
+## Blazor Scheduler Documentation
+
+- **Introduction:** https://blazor.syncfusion.com/documentation/introduction
+- **Schedule Component:** https://blazor.syncfusion.com/documentation/schedule/getting-started
