@@ -1,6 +1,6 @@
 # How to customize QuickInfo in Blazor Scheduler
 
-This quick start project demonstrates how to customize quick popups in the [Blazor Scheduler](https://www.syncfusion.com/blazor-components/blazor-scheduler), including tailoring quick info templates and modifying their appearance and behavior. It showcases advanced techniques for creating personalized and interactive popup experiences, helping developers enhance the scheduler interface to match application design and functionality requirements.
+This quick start project demonstrates how to customize quick popups in the [Blazor Scheduler](https://www.syncfusion.com/scheduler-sdk/blazor-scheduler), including tailoring quick info templates and modifying their appearance and behavior. It showcases advanced techniques for creating personalized and interactive popup experiences, helping developers enhance the scheduler interface to match application design and functionality requirements.
 
 ## Features
 
@@ -12,22 +12,50 @@ This quick start project demonstrates how to customize quick popups in the [Blaz
 
 ## Prerequisites
 
-* Visual Studio 2022 (or later)
-* .NET 10.0 SDK
+- Visual Studio 2026 or Visual Studio Code
+- [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0)
 
-## How to Run the Project
+## How to run the project
 
-1. Checkout this project to your local machine
-2. Open the solution file using Visual Studio 2022 (or later)
-3. Build the solution to restore the required NuGet packages
-4. Press `F5` to start the application
+**Visual Studio 2026**:
+
+* Checkout this project to a location in your disk.
+* Open the project (`Quick_Info_Scheduler.csproj` or `Quick_Info_Scheduler.csproj`) file.
+* Restore the NuGet packages.
+* Run the project.
+
+**Visual Studio Code**:
+
+* Open the repository folder in Visual Studio Code.
+* Open the integrated terminal.
+* Navigate to the repository root.
+
+For server,
+
+```bash
+cd blazor-scheduler-customize-quickinfo
+cd Quick_Info_Server
+dotnet restore
+dotnet run
+```
+
+For WASM,
+
+```bash
+cd blazor-scheduler-customize-quickinfo
+cd Quick_Info_Wasm
+dotnet restore
+dotnet run
+```
+
+Open the URL displayed in the terminal after the application starts.
 
 ## Documentation
 
-- **Quick Info Template Guide:** https://blazor.syncfusion.com/documentation/scheduler/editor-template#quick-popups
-- **Online Examples:** https://blazor.syncfusion.com/demos/scheduler/quick-info-template?theme=fluent
+- **Quick Info Template Guide:** https://help.syncfusion.com/scheduler-sdk/blazor/schedule/editor-template#quick-popups
+- **Online Examples:** https://blazor.syncfusion.com/demos/scheduler/quick-info-template?theme=fluent2
 
 ## Blazor Scheduler Documentation
 
 - **Introduction:** https://blazor.syncfusion.com/documentation/introduction
-- **Schedule Component:** https://blazor.syncfusion.com/documentation/schedule/getting-started
+- **Schedule Component:** https://help.syncfusion.com/scheduler-sdk/blazor/schedule/getting-started-with-server-app
