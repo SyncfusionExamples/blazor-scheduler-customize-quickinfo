@@ -12,13 +12,13 @@ This quick start project demonstrates how to customize quick popups in the [Blaz
 
 ## Prerequisites
 
-* Visual Studio 2022
-* .NET 6.0 or higher
+* Visual Studio 2022 (or later)
+* .NET 10.0 SDK
 
 ## How to Run the Project
 
 1. Checkout this project to your local machine
-2. Open the solution file using Visual Studio 2022
+2. Open the solution file using Visual Studio 2022 (or later)
 3. Build the solution to restore the required NuGet packages
 4. Press `F5` to start the application
 
