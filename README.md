@@ -20,7 +20,7 @@ This quick start project demonstrates how to customize quick popups in the [Blaz
 **Visual Studio 2026**:
 
 * Checkout this project to a location in your disk.
-* Open the project (`Quick_Info_Scheduler.csproj` or `Quick_Info_Scheduler.csproj`) file.
+* Open the project (`Quick_Info_Scheduler.csproj`) file.
 * Restore the NuGet packages.
 * Run the project.
 
